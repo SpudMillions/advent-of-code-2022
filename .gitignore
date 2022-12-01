@@ -1,3 +1,7 @@
+# jetbrains settings
+.idea
+# ignore compiled js
+build
 # Logs
 logs
 *.log
