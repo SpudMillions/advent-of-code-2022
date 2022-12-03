@@ -4,3 +4,5 @@
 new CalorieCounting().Play();
 //day 2
 new RockPaperScissors().Play();
+//day 3
+new RucksackReorganization().Play();
