@@ -9,14 +9,16 @@ internal partial class RockPaperScissors
 
     internal void Play()
     {
-        List<RoundMoves> roundMoves = LoadData("day2.txt");
+        var input = InputLoader.LoadData("day2.txt", "2");
+        List<RoundMoves> roundMoves = createRounds(input, EntryType.Move);
+        List<RoundMoves> roundResults = createRounds(input, EntryType.Result);
         var totalScore = 0;
         var totalScorePartTwo = 0;
 
         foreach (var roundMove in roundMoves)
         {
             var roundScore = GetScoreFromRoundResult(roundMove);
-            var moveScore = GetScoreForMoveUsed(roundMove.PlayerMove);
+            var moveScore = GetScoreForMoveUsed(roundMove.SecondEntry);
             var roundScorePartTwo = GetScoreFromRoundResultPartTwo(roundMove);
             var moveScorePartTwo = GetScoreForMoveUsedPartTwo(roundMove);
 
@@ -29,38 +31,38 @@ internal partial class RockPaperScissors
 
     private int GetScoreForMoveUsedPartTwo(RoundMoves roundMove)
     {
-        if(roundMove.PlayerMove == Move.Rock){
-            if(roundMove.ElfMove == Move.Rock){
+        if(roundMove.SecondEntry == Move.ElfWins){
+            if(roundMove.FirstEntry == Move.Rock){
                 return 3;
             }
-            if(roundMove.ElfMove == Move.Paper){
+            if(roundMove.FirstEntry == Move.Paper){
                 return 1;
             }
-            if(roundMove.ElfMove == Move.Scissors){
+            if(roundMove.FirstEntry == Move.Scissors){
                 return 2;
             }
         }
 
-        if(roundMove.PlayerMove == Move.Paper){
-            if(roundMove.ElfMove == Move.Rock){
+        if(roundMove.SecondEntry == Move.Draw){
+            if(roundMove.FirstEntry == Move.Rock){
                 return 1;
             }
-            if(roundMove.ElfMove == Move.Paper){
+            if(roundMove.FirstEntry == Move.Paper){
                 return 2;
             }
-            if(roundMove.ElfMove == Move.Scissors){
+            if(roundMove.FirstEntry == Move.Scissors){
                 return 3;
             }
         }
 
-        if(roundMove.PlayerMove == Move.Scissors){
-            if(roundMove.ElfMove == Move.Rock){
+        if(roundMove.SecondEntry == Move.PlayerWins){
+            if(roundMove.FirstEntry == Move.Rock){
                 return 2;
             }
-            if(roundMove.ElfMove == Move.Paper){
+            if(roundMove.FirstEntry == Move.Paper){
                 return 3;
             }
-            if(roundMove.ElfMove == Move.Scissors){
+            if(roundMove.FirstEntry == Move.Scissors){
                 return 1;
             }
         }
@@ -69,23 +71,23 @@ internal partial class RockPaperScissors
 
     private int GetScoreFromRoundResultPartTwo(RoundMoves roundMove)
     {
-        if(roundMove.PlayerMove == Move.Scissors){
+        if(roundMove.SecondEntry == Move.PlayerWins){
             return 6;
         }
-        if( roundMove.PlayerMove == Move.Paper){
+        if( roundMove.SecondEntry == Move.Draw){
             return 3;
         }
         return 0;
     }
 
     internal int GetScoreFromRoundResult(RoundMoves roundMoves){
-        if(roundMoves.PlayerMove == Move.Rock && roundMoves.ElfMove == Move.Scissors){
+        if(roundMoves.SecondEntry == Move.Rock && roundMoves.FirstEntry == Move.Scissors){
             return 6;
-        } else if(roundMoves.PlayerMove == Move.Paper && roundMoves.ElfMove == Move.Rock){
+        } else if(roundMoves.SecondEntry == Move.Paper && roundMoves.FirstEntry == Move.Rock){
             return 6;
-        } else if(roundMoves.PlayerMove == Move.Scissors && roundMoves.ElfMove == Move.Paper){
+        } else if(roundMoves.SecondEntry == Move.Scissors && roundMoves.FirstEntry == Move.Paper){
             return 6;
-        } else if(roundMoves.PlayerMove == roundMoves.ElfMove){
+        } else if(roundMoves.SecondEntry == roundMoves.FirstEntry){
             return 3;
         }
         return 0;
@@ -104,20 +106,17 @@ internal partial class RockPaperScissors
 
 
     //load input data from file return list of pairs
-    internal List<RoundMoves> LoadData(string fileName)
+    internal List<RoundMoves> createRounds(List<string> lines, EntryType entryType)
     {
         List<RoundMoves> moves = new List<RoundMoves>();
-        //get the file path
-        var filePath = Path.Combine(Environment.CurrentDirectory, "Day2/" + fileName);
-        //read the file
-        var lines = File.ReadAllLines(filePath);
+
         //loop through the lines
         foreach (string line in lines)
         {
             //split the line into parts
             var currentRound = line.Split(' ');
             var elfMove = currentRound[0].ToMove();
-            var playerMove = currentRound[1].ToMove();
+            var playerMove = entryType == EntryType.Move ? currentRound[1].ToMove() : currentRound[1].ToResult();
             var round = new RoundMoves(elfMove, playerMove);
             moves.Add(round);
         }

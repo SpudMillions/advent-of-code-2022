@@ -1,5 +1,8 @@
 public enum Move {
     Rock,
     Paper,
-    Scissors
+    Scissors,
+    PlayerWins,
+    ElfWins,
+    Draw
 }

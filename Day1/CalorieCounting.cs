@@ -16,7 +16,7 @@ class CalorieCounting {
 
 
     internal void Play(){
-        List<string> calorieLog = LoadData("day1.txt");
+        List<string> calorieLog = InputLoader.LoadData("day1.txt", "1");
 
         var elfList = createElfList(calorieLog);
         elfList.Sort();
@@ -24,19 +24,5 @@ class CalorieCounting {
         var lastThreeEntries = elfList.GetRange(elfList.Count - 3, 3).Sum();
 
         Console.WriteLine($"Day1: Max calorie entry: {firstEntry}, Top three elves: {lastThreeEntries}");
-    }
-
-    private List<string> LoadData(string fileName)
-    {
-        List<string> logs = new List<string>();
-
-        var filePath = Path.Combine(Environment.CurrentDirectory, "Day1/" + fileName);
-        var lines = File.ReadAllLines(filePath);
-
-        foreach (string line in lines)
-        {
-            logs.Add(line);
-        }
-        return logs;
     }
 }

@@ -18,4 +18,25 @@ public static class Extensions
                 throw new ArgumentException($"Invalid move: {move}");
         }
     }
+
+    public static Move ToResult(this string move)
+    {
+         switch (move)
+        {
+            case "X":
+                return Move.ElfWins;
+            case "A":
+                return Move.Rock;
+            case "Y":
+                return Move.Draw;
+            case "B":
+                return Move.Paper;
+            case "Z":
+                return Move.PlayerWins;
+            case "C":
+                return Move.Scissors;
+            default:
+                throw new ArgumentException($"Invalid move: {move}");
+        }
+    }
 }

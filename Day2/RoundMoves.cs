@@ -4,13 +4,25 @@ internal partial class RockPaperScissors
 {
     internal class RoundMoves
     {
-        public RoundMoves(Move elfMove, Move playerMove)
+        public RoundMoves(Move firstEntry, Move secondEntry)
         {
-            PlayerMove = playerMove;
-            ElfMove = elfMove;
+            SecondEntry = secondEntry;
+            FirstEntry = firstEntry;
         }
 
-        public Move PlayerMove { get; set; }
-        public Move ElfMove { get; set; }
+        public Move SecondEntry { get; set; }
+        public Move FirstEntry { get; set; }
+    }
+
+    internal class RoundResult
+    {
+        public RoundResult(RoundResult firstEntry, RoundResult secondEntry)
+        {
+            SecondEntry = secondEntry;
+            FirstEntry = firstEntry;
+        }
+
+        public RoundResult SecondEntry { get; set; }
+        public RoundResult FirstEntry { get; set; }
     }
 }
