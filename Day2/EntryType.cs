@@ -1,4 +1,9 @@
-public enum EntryType {
-    Move,
-    Result
+
+namespace AdventOfCode.Days
+{
+    public enum EntryType
+    {
+        Move,
+        Result
+    }
 }

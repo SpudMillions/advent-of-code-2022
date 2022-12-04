@@ -12,4 +12,5 @@ This repository contains my solutions for [advent of code.](https://adventofcode
 ```
 Day1: Max calorie entry: 70764, Top three elves: 203905
 Day2: Total score: 15523, Total score part two: 15702
+Day3: Total score: 7691, Total score part two: 2508
 ```

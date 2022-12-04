@@ -1,16 +1,19 @@
-    class InputLoader
+    namespace AdventOfCode.Common
     {
-        public static List<string> LoadData(string fileName, string dayNumber)
+        public static class  InputLoader
         {
-            List<string> logs = new List<string>();
-
-            var filePath = Path.Combine(Environment.CurrentDirectory, $"Day{dayNumber}/" + fileName);
-            var lines = File.ReadAllLines(filePath);
-
-            foreach (string line in lines)
+            public static List<string> LoadData(string fileName, string dayNumber)
             {
-                logs.Add(line);
+                List<string> logs = new List<string>();
+
+                var filePath = Path.Combine(Environment.CurrentDirectory, $"Day{dayNumber}/" + fileName);
+                var lines = File.ReadAllLines(filePath);
+
+                foreach (string line in lines)
+                {
+                    logs.Add(line);
+                }
+                return logs;
             }
-            return logs;
         }
     }
