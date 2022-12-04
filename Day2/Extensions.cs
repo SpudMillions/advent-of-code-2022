@@ -1,5 +1,7 @@
 
-namespace AdventOfCode.Days
+using System;
+
+namespace AdventOfCode.Day2
 {
     public static class Extensions
     {
@@ -24,23 +26,16 @@ namespace AdventOfCode.Days
 
         public static Move ToResult(this string move)
         {
-            switch (move)
+            return move switch
             {
-                case "X":
-                    return Move.ElfWins;
-                case "A":
-                    return Move.Rock;
-                case "Y":
-                    return Move.Draw;
-                case "B":
-                    return Move.Paper;
-                case "Z":
-                    return Move.PlayerWins;
-                case "C":
-                    return Move.Scissors;
-                default:
-                    throw new ArgumentException($"Invalid move: {move}");
-            }
+                "X" => Move.ElfWins,
+                "A" => Move.Rock,
+                "Y" => Move.Draw,
+                "B" => Move.Paper,
+                "Z" => Move.PlayerWins,
+                "C" => Move.Scissors,
+                _ => throw new ArgumentException($"Invalid move: {move}")
+            };
         }
     }
 }

@@ -1,5 +1,5 @@
 
-namespace AdventOfCode.Days
+namespace AdventOfCode.Day2
 {
     public enum EntryType
     {

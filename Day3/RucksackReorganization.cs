@@ -1,10 +1,13 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using AdventOfCode.Common;
 
-namespace AdventOfCode.Days
+namespace AdventOfCode.Day3
 {
-    class RucksackReorganization
+    internal static class RucksackReorganization
     {
-        internal void Play()
+        internal static void Play()
         {
             const int UPPEROFFSET = 38;
             const int LOWEROFFSET = 96;
@@ -39,7 +42,7 @@ namespace AdventOfCode.Days
                 }
 
                 var middle = line.Length / 2;
-                var firstHalf = line.Substring(0, middle);
+                var firstHalf = line[..middle];
                 var secondHalf = line.Substring(middle, middle);
 
                 firstHalf.Intersect(secondHalf).ToList().ForEach(x =>

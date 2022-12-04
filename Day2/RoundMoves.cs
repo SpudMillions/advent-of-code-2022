@@ -1,6 +1,6 @@
-namespace AdventOfCode.Days
+namespace AdventOfCode.Day2
 {
-    internal partial class RockPaperScissors
+    public partial class RockPaperScissors
     {
         internal class RoundMoves
         {

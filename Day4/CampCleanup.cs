@@ -1,10 +1,13 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using AdventOfCode.Common;
 
-namespace AdventOfCode.Days
+namespace AdventOfCode.Day4
 {
-    class CampCleanup
+    internal static class CampCleanup
     {
-        internal void Play()
+        internal static void Play()
         {
             var input = InputLoader.LoadData("day4.txt", "4");
 
@@ -34,7 +37,7 @@ namespace AdventOfCode.Days
                     totalAnyOverlap++;
                 }
 
-                if(overlapping.Count == firstSectionCleaning.Count() || overlapping.Count == secondSectionCleaning.Count())
+                if(overlapping.Count == firstSectionCleaning.Count || overlapping.Count == secondSectionCleaning.Count)
                 {
                     totalOverlappingCompletely++;
                 }            

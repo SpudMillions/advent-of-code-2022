@@ -1,154 +1,105 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using AdventOfCode.Common;
 
-namespace AdventOfCode.Days
+namespace AdventOfCode.Day2
 {
-    internal partial class RockPaperScissors
+    public partial class RockPaperScissors
     {
-        public RockPaperScissors()
-        {
-        }
-
-        internal void Play()
+        internal static void Play()
         {
             var input = InputLoader.LoadData("day2.txt", "2");
-            List<RoundMoves> roundMoves = createRounds(input, EntryType.Move);
-            List<RoundMoves> roundResults = createRounds(input, EntryType.Result);
+            IEnumerable<RoundMoves> roundMoves = CreateRounds(input, EntryType.Move);
+            IEnumerable<RoundMoves> roundResults = CreateRounds(input, EntryType.Result);
 
-            var totalScore = 0;
-            var totalScorePartTwo = 0;
+            var totalScore = (from roundMove in roundMoves
+                let roundScore = GetScoreFromRoundResult(roundMove)
+                let moveScore = GetScoreForMoveUsed(roundMove.SecondEntry)
+                select (roundScore + moveScore)).Sum();
 
-            foreach (var roundMove in roundMoves)
-            {
-                var roundScore = GetScoreFromRoundResult(roundMove);
-                var moveScore = GetScoreForMoveUsed(roundMove.SecondEntry);
-
-                totalScore += (roundScore + moveScore);
-            }
-
-            foreach (var roundMove in roundResults)
-            {
-                var roundScorePartTwo = GetScoreFromRoundResultPartTwo(roundMove);
-                var moveScorePartTwo = GetScoreForMoveUsedPartTwo(roundMove);
-
-                totalScorePartTwo += (roundScorePartTwo + moveScorePartTwo);
-            }
+            var totalScorePartTwo = (from roundMove in roundResults
+                let roundScorePartTwo = GetScoreFromRoundResultPartTwo(roundMove)
+                let moveScorePartTwo = GetScoreForMoveUsedPartTwo(roundMove)
+                select (roundScorePartTwo + moveScorePartTwo)).Sum();
 
             Console.WriteLine($"Day2: Total score: {totalScore}, Total score part two: {totalScorePartTwo}");
         }
 
-        private int GetScoreForMoveUsedPartTwo(RoundMoves roundMove)
+        private static int GetScoreForMoveUsedPartTwo(RoundMoves roundMove)
         {
-            if (roundMove.SecondEntry == Move.ElfWins)
+            return roundMove.SecondEntry switch
             {
-                if (roundMove.FirstEntry == Move.Rock)
+                Move.ElfWins when roundMove.FirstEntry == Move.Rock => 3,
+                Move.ElfWins when roundMove.FirstEntry == Move.Paper => 1,
+                Move.ElfWins when roundMove.FirstEntry == Move.Scissors => 2,
+                Move.Draw when roundMove.FirstEntry == Move.Rock => 1,
+                Move.Draw when roundMove.FirstEntry == Move.Paper => 2,
+                Move.Draw when roundMove.FirstEntry == Move.Scissors => 3,
+                Move.PlayerWins when roundMove.FirstEntry == Move.Rock => 2,
+                Move.PlayerWins when roundMove.FirstEntry == Move.Paper => 3,
+                Move.PlayerWins when roundMove.FirstEntry == Move.Scissors => 1,
+                _ => 0
+            };
+        }
+
+        private static int GetScoreFromRoundResultPartTwo(RoundMoves roundMoves)
+        {
+            return roundMoves.SecondEntry switch
+            {
+                Move.PlayerWins => 6,
+                Move.Draw => 3,
+                _ => 0
+            };
+        }
+
+        private static int GetScoreFromRoundResult(RoundMoves roundMoves)
+        {
+            switch (roundMoves.SecondEntry)
+            {
+                case Move.Rock when roundMoves.FirstEntry == Move.Scissors:
+                case Move.Paper when roundMoves.FirstEntry == Move.Rock:
+                case Move.Scissors when roundMoves.FirstEntry == Move.Paper:
+                    return 6;
+                case Move.PlayerWins:
+                    break;
+                case Move.ElfWins:
+                    break;
+                case Move.Draw:
+                    break;
+                default:
                 {
-                    return 3;
-                }
-                if (roundMove.FirstEntry == Move.Paper)
-                {
-                    return 1;
-                }
-                if (roundMove.FirstEntry == Move.Scissors)
-                {
-                    return 2;
+                    if (roundMoves.SecondEntry == roundMoves.FirstEntry)
+                    {
+                        return 3;
+                    }
+
+                    break;
                 }
             }
 
-            if (roundMove.SecondEntry == Move.Draw)
-            {
-                if (roundMove.FirstEntry == Move.Rock)
-                {
-                    return 1;
-                }
-                if (roundMove.FirstEntry == Move.Paper)
-                {
-                    return 2;
-                }
-                if (roundMove.FirstEntry == Move.Scissors)
-                {
-                    return 3;
-                }
-            }
-
-            if (roundMove.SecondEntry == Move.PlayerWins)
-            {
-                if (roundMove.FirstEntry == Move.Rock)
-                {
-                    return 2;
-                }
-                if (roundMove.FirstEntry == Move.Paper)
-                {
-                    return 3;
-                }
-                if (roundMove.FirstEntry == Move.Scissors)
-                {
-                    return 1;
-                }
-            }
             return 0;
         }
 
-        internal int GetScoreFromRoundResultPartTwo(RoundMoves roundMoves)
+        private static int GetScoreForMoveUsed(Move move)
         {
-            if (roundMoves.SecondEntry == Move.PlayerWins)
+            return move switch
             {
-                return 6;
-            }
-            if (roundMoves.SecondEntry == Move.Draw)
-            {
-                return 3;
-            }
-            return 0;
-        }
-
-        internal int GetScoreFromRoundResult(RoundMoves roundMoves)
-        {
-            if (roundMoves.SecondEntry == Move.Rock && roundMoves.FirstEntry == Move.Scissors)
-            {
-                return 6;
-            }
-            else if (roundMoves.SecondEntry == Move.Paper && roundMoves.FirstEntry == Move.Rock)
-            {
-                return 6;
-            }
-            else if (roundMoves.SecondEntry == Move.Scissors && roundMoves.FirstEntry == Move.Paper)
-            {
-                return 6;
-            }
-            else if (roundMoves.SecondEntry == roundMoves.FirstEntry)
-            {
-                return 3;
-            }
-            return 0;
-        }
-
-        internal int GetScoreForMoveUsed(Move move)
-        {
-            if (move == Move.Rock)
-            {
-                return 1;
-            }
-            else if (move == Move.Paper)
-            {
-                return 2;
-            }
-            else if (move == Move.Scissors)
-            {
-                return 3;
-            }
-            return 0;
+                Move.Rock => 1,
+                Move.Paper => 2,
+                Move.Scissors => 3,
+                _ => 0
+            };
         }
 
 
         //load input data from file return list of pairs
-        internal List<RoundMoves> createRounds(List<string> lines, EntryType entryType)
+        private static IEnumerable<RoundMoves> CreateRounds(List<string> lines, EntryType entryType)
         {
             List<RoundMoves> moves = new List<RoundMoves>();
-
-            //loop through the lines
+            
             foreach (string line in lines)
             {
-                //split the line into parts
                 var currentRound = line.Split(' ');
                 var elfMove = entryType == EntryType.Move ? currentRound[0].ToMove() : currentRound[0].ToResult();
                 var playerMove = entryType == EntryType.Move ? currentRound[1].ToMove() : currentRound[1].ToResult();
