@@ -13,20 +13,18 @@ namespace AdventOfCode.Day4
 
             var totalOverlappingCompletely = 0;
             var totalAnyOverlap = 0;
+            
+            List<int> firstSectionCleaning = new List<int>();
+            List<int> secondSectionCleaning = new List<int>();
 
             foreach (var line in input)
             {
                 var sections = line.Split(',');
-                var firstSection = sections[0];
-                var secondSection = sections[1];
-                var firstSectionStart = int.Parse(firstSection.Split('-')[0]);
-                var firstSectionEnd = int.Parse(firstSection.Split('-')[1]);
-                var secondSectionStart = int.Parse(secondSection.Split('-')[0]);
-                var secondSectionEnd = int.Parse(secondSection.Split('-')[1]);
-            
-
-                List<int> firstSectionCleaning = new List<int>();
-                List<int> secondSectionCleaning = new List<int>();
+                var firstSectionStart =  int.Parse(sections[0].Split('-')[0]);
+                var firstSectionEnd = int.Parse( sections[0].Split('-')[1]);
+                var secondSectionStart = int.Parse(sections[1].Split('-')[0]);
+                var secondSectionEnd = int.Parse(sections[1].Split('-')[1]);
+                
                 firstSectionCleaning.AddRange(Enumerable.Range(firstSectionStart, firstSectionEnd - firstSectionStart + 1));
                 secondSectionCleaning.AddRange(Enumerable.Range(secondSectionStart, secondSectionEnd - secondSectionStart + 1));
                 
@@ -40,7 +38,10 @@ namespace AdventOfCode.Day4
                 if(overlapping.Count == firstSectionCleaning.Count || overlapping.Count == secondSectionCleaning.Count)
                 {
                     totalOverlappingCompletely++;
-                }            
+                }         
+                
+                firstSectionCleaning.Clear();
+                secondSectionCleaning.Clear();
             }
 
             Console.WriteLine($"Day4: Total overlapping completely: {totalOverlappingCompletely}, Total any overlap: {totalAnyOverlap}");
