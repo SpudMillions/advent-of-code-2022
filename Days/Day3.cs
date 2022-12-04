@@ -1,17 +1,21 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using AdventOfCode.Common;
 
-namespace AdventOfCode.Day3
+namespace AdventOfCode.Days
 {
-    internal class RucksackReorganization
+    public class Day3 : DayBase
     {
-        internal void Play()
+        public Day3() : base(3, 2022, "Rucksack Reorganization")
+        {
+        }
+
+        public override void Play()
         {
             const int UPPEROFFSET = 38;
             const int LOWEROFFSET = 96;
-            var input = InputLoader.LoadData("day3.txt", "3");
+            var input = Input;
 
             var total = 0;
             var badgeTotal = 0;
@@ -58,8 +62,8 @@ namespace AdventOfCode.Day3
                 });
 
             }
-            
-            Console.WriteLine($"Day3: Total score: {total}, Total score part two: {badgeTotal}");
+
+            Console.WriteLine($"{GetType().Name}: {Title} -- Total score: {total}, Total score part two: {badgeTotal}");
         }
     }
 }

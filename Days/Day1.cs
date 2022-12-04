@@ -1,12 +1,16 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using AdventOfCode.Common;
 
-namespace AdventOfCode.Day1
+namespace AdventOfCode.Days
 {
-    internal class CalorieCounting
+    internal class Day1: DayBase
     {
+        public Day1() : base(1, 2022, "Calorie Counting")
+        {
+        }
+
         private List<int> CreateElfList(List<string> calorieLog)
         {
             var elfList = new List<int>();
@@ -16,7 +20,7 @@ namespace AdventOfCode.Day1
             {
                 if (logEntry.Length > 0)
                 {
-                    currentCalories += Int32.Parse(logEntry);
+                    currentCalories += int.Parse(logEntry);
                 }
                 else
                 {
@@ -28,16 +32,16 @@ namespace AdventOfCode.Day1
         }
 
 
-        internal void Play()
+        public override void Play()
         {
-            List<string> calorieLog = InputLoader.LoadData("day1.txt", "1");
+            List<string> calorieLog = Input;
 
             var elfList = CreateElfList(calorieLog);
             elfList.Sort();
             var firstEntry = elfList[^1];
             var lastThreeEntries = elfList.GetRange(elfList.Count - 3, 3).Sum();
 
-            Console.WriteLine($"Day1: Max calorie entry: {firstEntry}, Top three elves: {lastThreeEntries}");
+            Console.WriteLine($"{GetType().Name}: {Title} -- Max calorie entry: {firstEntry}, Top three elves: {lastThreeEntries}");
         }
     }
 }

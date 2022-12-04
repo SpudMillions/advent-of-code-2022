@@ -1,11 +1,6 @@
-﻿//day 1
+﻿using AdventOfCode.Days;
 
-using AdventOfCode.Day1;
-using AdventOfCode.Day2;
-using AdventOfCode.Day3;
-using AdventOfCode.Day4;
-
-new CalorieCounting().Play();
-new RockPaperScissors().Play();
-new RucksackReorganization().Play();
-new CampCleanup().Play();
+new Day1().Play();
+new Day2().Play();
+new Day3().Play();
+new Day4().Play();

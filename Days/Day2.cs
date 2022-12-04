@@ -1,15 +1,19 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using AdventOfCode.Common;
 
-namespace AdventOfCode.Day2
+namespace AdventOfCode.Days
 {
-    internal class RockPaperScissors
+    public class Day2 : DayBase
     {
-        internal void Play()
+        internal Day2() : base(2, 2022, "Rock Paper Scissors")
         {
-            var input = InputLoader.LoadData("day2.txt", "2");
+        }
+
+        public override void Play()
+        {
+            var input = Input;
             IEnumerable<RoundMoves> roundMoves = CreateRounds(input, EntryType.Move);
             IEnumerable<RoundMoves> roundResults = CreateRounds(input, EntryType.Result);
 
@@ -97,7 +101,7 @@ namespace AdventOfCode.Day2
         private IEnumerable<RoundMoves> CreateRounds(List<string> lines, EntryType entryType)
         {
             List<RoundMoves> moves = new List<RoundMoves>();
-            
+
             foreach (string line in lines)
             {
                 var currentRound = line.Split(' ');
@@ -106,7 +110,73 @@ namespace AdventOfCode.Day2
                 var round = new RoundMoves(elfMove, playerMove);
                 moves.Add(round);
             }
+
             return moves;
         }
+    }
+    
+    
+    public enum Move
+    {
+        Rock,
+        Paper,
+        Scissors,
+        PlayerWins,
+        ElfWins,
+        Draw
+    }
+    
+    public static class Extensions
+    {
+        //string being passed in is a word or phrase
+        public static Move ToMove(this string move)
+        {
+            switch (move)
+            {
+                case "X":
+                case "A":
+                    return Move.Rock;
+                case "Y":
+                case "B":
+                    return Move.Paper;
+                case "Z":
+                case "C":
+                    return Move.Scissors;
+                default:
+                    throw new ArgumentException($"Invalid move: {move}");
+            }
+        }
+
+        public static Move ToResult(this string move)
+        {
+            return move switch
+            {
+                "X" => Move.ElfWins,
+                "A" => Move.Rock,
+                "Y" => Move.Draw,
+                "B" => Move.Paper,
+                "Z" => Move.PlayerWins,
+                "C" => Move.Scissors,
+                _ => throw new ArgumentException($"Invalid move: {move}")
+            };
+        }
+    }
+    
+    public enum EntryType
+    {
+        Move,
+        Result
+    }
+    
+    internal class RoundMoves
+    {
+        public RoundMoves(Move firstEntry, Move secondEntry)
+        {
+            SecondEntry = secondEntry;
+            FirstEntry = firstEntry;
+        }
+
+        public Move SecondEntry { get; set; }
+        public Move FirstEntry { get; set; }
     }
 }

@@ -1,15 +1,19 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using AdventOfCode.Common;
 
-namespace AdventOfCode.Day4
+namespace AdventOfCode.Days
 {
-    internal class CampCleanup
+    public class Day4: DayBase
     {
-        internal void Play()
+        public Day4() : base(4, 2022, "Camp Cleanup")
         {
-            var input = InputLoader.LoadData("day4.txt", "4");
+        }
+
+        public override void Play()
+        {
+            var input = Input;
 
             var totalOverlappingCompletely = 0;
             var totalAnyOverlap = 0;
@@ -20,7 +24,7 @@ namespace AdventOfCode.Day4
             foreach (var line in input)
             {
                 var sections = line.Split(',');
-                var firstSectionStart =  int.Parse(sections[0].Split('-')[0]);
+                var firstSectionStart = int.Parse(sections[0].Split('-')[0]);
                 var firstSectionEnd = int.Parse( sections[0].Split('-')[1]);
                 var secondSectionStart = int.Parse(sections[1].Split('-')[0]);
                 var secondSectionEnd = int.Parse(sections[1].Split('-')[1]);
@@ -44,7 +48,7 @@ namespace AdventOfCode.Day4
                 secondSectionCleaning.Clear();
             }
 
-            Console.WriteLine($"Day4: Total overlapping completely: {totalOverlappingCompletely}, Total any overlap: {totalAnyOverlap}");
+            Console.WriteLine($"{GetType().Name}: {Title} -- Total overlapping completely: {totalOverlappingCompletely}, Total any overlap: {totalAnyOverlap}");
         }
     }
 }
