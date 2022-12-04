@@ -1,10 +1,8 @@
 namespace AdventOfCode.Day2
 {
-    public partial class RockPaperScissors
+    internal class RoundMoves
     {
-        internal class RoundMoves
-        {
-            public RoundMoves(Move firstEntry, Move secondEntry)
+        public RoundMoves(Move firstEntry, Move secondEntry)
             {
                 SecondEntry = secondEntry;
                 FirstEntry = firstEntry;
@@ -26,4 +24,3 @@ namespace AdventOfCode.Day2
             public RoundResult FirstEntry { get; set; }
         }
     }
-}

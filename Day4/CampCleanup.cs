@@ -5,9 +5,9 @@ using AdventOfCode.Common;
 
 namespace AdventOfCode.Day4
 {
-    internal static class CampCleanup
+    internal class CampCleanup
     {
-        internal static void Play()
+        internal void Play()
         {
             var input = InputLoader.LoadData("day4.txt", "4");
 

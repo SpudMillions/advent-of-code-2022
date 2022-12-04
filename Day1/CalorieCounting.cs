@@ -5,9 +5,9 @@ using AdventOfCode.Common;
 
 namespace AdventOfCode.Day1
 {
-    internal static class CalorieCounting
+    internal class CalorieCounting
     {
-        private static List<int> CreateElfList(List<string> calorieLog)
+        private List<int> CreateElfList(List<string> calorieLog)
         {
             var elfList = new List<int>();
             var currentCalories = 0;
@@ -28,7 +28,7 @@ namespace AdventOfCode.Day1
         }
 
 
-        internal static void Play()
+        internal void Play()
         {
             List<string> calorieLog = InputLoader.LoadData("day1.txt", "1");
 

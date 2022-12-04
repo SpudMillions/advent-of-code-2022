@@ -5,9 +5,9 @@ using AdventOfCode.Common;
 
 namespace AdventOfCode.Day3
 {
-    internal static class RucksackReorganization
+    internal class RucksackReorganization
     {
-        internal static void Play()
+        internal void Play()
         {
             const int UPPEROFFSET = 38;
             const int LOWEROFFSET = 96;

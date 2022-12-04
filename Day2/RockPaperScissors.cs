@@ -5,9 +5,9 @@ using AdventOfCode.Common;
 
 namespace AdventOfCode.Day2
 {
-    public partial class RockPaperScissors
+    internal class RockPaperScissors
     {
-        internal static void Play()
+        internal void Play()
         {
             var input = InputLoader.LoadData("day2.txt", "2");
             IEnumerable<RoundMoves> roundMoves = CreateRounds(input, EntryType.Move);
@@ -26,7 +26,7 @@ namespace AdventOfCode.Day2
             Console.WriteLine($"Day2: Total score: {totalScore}, Total score part two: {totalScorePartTwo}");
         }
 
-        private static int GetScoreForMoveUsedPartTwo(RoundMoves roundMove)
+        private int GetScoreForMoveUsedPartTwo(RoundMoves roundMove)
         {
             return roundMove.SecondEntry switch
             {
@@ -43,7 +43,7 @@ namespace AdventOfCode.Day2
             };
         }
 
-        private static int GetScoreFromRoundResultPartTwo(RoundMoves roundMoves)
+        private int GetScoreFromRoundResultPartTwo(RoundMoves roundMoves)
         {
             return roundMoves.SecondEntry switch
             {
@@ -53,7 +53,7 @@ namespace AdventOfCode.Day2
             };
         }
 
-        private static int GetScoreFromRoundResult(RoundMoves roundMoves)
+        private int GetScoreFromRoundResult(RoundMoves roundMoves)
         {
             switch (roundMoves.SecondEntry)
             {
@@ -81,7 +81,7 @@ namespace AdventOfCode.Day2
             return 0;
         }
 
-        private static int GetScoreForMoveUsed(Move move)
+        private int GetScoreForMoveUsed(Move move)
         {
             return move switch
             {
@@ -94,7 +94,7 @@ namespace AdventOfCode.Day2
 
 
         //load input data from file return list of pairs
-        private static IEnumerable<RoundMoves> CreateRounds(List<string> lines, EntryType entryType)
+        private IEnumerable<RoundMoves> CreateRounds(List<string> lines, EntryType entryType)
         {
             List<RoundMoves> moves = new List<RoundMoves>();
             
