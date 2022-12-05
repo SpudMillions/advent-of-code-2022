@@ -14,14 +14,14 @@ namespace AdventOfCode.Days
         public override void Play()
         {
             const char emptyChar = (char)32;
-            var packageRows = (from line in Input
+            var packageRowsFifo = (from line in Input
                 where !line.StartsWith("move")
                 select line.Replace("[", " ")
                     .Replace("]", " ")
                 into characters
                 select characters.ToList()).ToList();
             
-            var packageRowsCopy = packageRows.Select(row => row.ToList()).ToList();
+            var packageRowsLifo = packageRowsFifo.Select(row => row.ToList()).ToList();
 
             foreach (var command in from line in Input
                 where line.StartsWith("move")
@@ -40,32 +40,35 @@ namespace AdventOfCode.Days
 
                 while (numberOfMoves > 0)
                 {
-                    var newPackageRows = new List<char>();
-                    var newPackageRowsCopy = new List<char>();
-                    
-                    var fromIndex = packageRows.FindIndex(row => row[from] != emptyChar);
-                    var fromIndexCopy = packageRowsCopy.FindIndex(row => row[from] != emptyChar);
-                    for (var i = 0; i < 35; i++)
-                    {
-                        newPackageRows.Add(emptyChar);
-                        newPackageRowsCopy.Add(emptyChar);
-                    }
-
-                    newPackageRows.Insert(to, packageRows[fromIndex][from]);
-                    newPackageRowsCopy.Insert(to, packageRowsCopy[fromIndexCopy][from]);
-                    packageRows[fromIndex][from] = emptyChar;
-                    packageRowsCopy[fromIndex][from] = emptyChar;
-                    packageRows.Insert(0, newPackageRows); 
-                    packageRowsCopy.Insert(0 + numberOfPackagesToLift, newPackageRowsCopy);
+                    var fromIndex = packageRowsFifo.FindIndex(row => row[from] != emptyChar);
+                    var fromIndexCopy = packageRowsLifo.FindIndex(row => row[from] != emptyChar);
+                    var newFifoRow = MovePackage( to, packageRowsFifo, fromIndex, @from);
+                    var newLifoRow = MovePackage(to, packageRowsLifo, fromIndexCopy, @from);
+                    packageRowsFifo.Insert(0, newFifoRow);
+                    packageRowsLifo.Insert(numberOfPackagesToLift, newLifoRow);
                     numberOfPackagesToLift += 1;
                     numberOfMoves -= 1;
                 }
             }
-            var topRowPackages = TopRowPackages(packageRows);
-            var packageRowsCopyPackages = TopRowPackages(packageRowsCopy);
+            var topRowPackages = TopRowPackages(packageRowsFifo);
+            var packageRowsCopyPackages = TopRowPackages(packageRowsLifo);
             
             Console.WriteLine($"{GetType().Name}: {Title} --- First Order Top Packages: {topRowPackages}. Second Order Top Packages: {packageRowsCopyPackages}");
 
+        }
+
+        private static List<char> MovePackage(int to,
+            IReadOnlyList<List<char>> packageRowsInput, int fromIndex, int @from)
+        {
+            var newPackageRows = new List<char>();
+            for (var i = 0; i < 35; i++)
+            {
+                newPackageRows.Add((char)32);
+            }
+
+            newPackageRows.Insert(to, packageRowsInput[fromIndex][@from]);
+            packageRowsInput[fromIndex][@from] = (char)32;
+            return newPackageRows;
         }
 
         private static int ConvertInputUsingOffset(string command)
