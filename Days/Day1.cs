@@ -7,9 +7,7 @@ namespace AdventOfCode.Days
 {
     internal class Day1: DayBase
     {
-        public Day1() : base(1, 2022, "Calorie Counting")
-        {
-        }
+        public Day1() : base(1, 2022, "Calorie Counting"){}
 
         private List<int> CreateElfList(List<string> calorieLog)
         {

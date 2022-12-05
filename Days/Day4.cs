@@ -7,9 +7,7 @@ namespace AdventOfCode.Days
 {
     public class Day4: DayBase
     {
-        public Day4() : base(4, 2022, "Camp Cleanup")
-        {
-        }
+        public Day4() : base(4, 2022, "Camp Cleanup"){}
 
         public override void Play()
         {

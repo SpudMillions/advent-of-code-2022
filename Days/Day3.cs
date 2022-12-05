@@ -7,14 +7,13 @@ namespace AdventOfCode.Days
 {
     public class Day3 : DayBase
     {
-        public Day3() : base(3, 2022, "Rucksack Reorganization")
-        {
-        }
-
+        public Day3() : base(3, 2022, "Rucksack Reorganization"){}
+        
+        private const int UpperOffSet = 38;
+        private const int LowerOffSet = 96;
         public override void Play()
         {
-            const int UPPEROFFSET = 38;
-            const int LOWEROFFSET = 96;
+            
             var input = Input;
 
             var total = 0;
@@ -33,11 +32,11 @@ namespace AdventOfCode.Days
                     {
                         if (x >= 65 && x <= 90)
                         {
-                            badgeTotal += x - UPPEROFFSET;
+                            badgeTotal += x - UpperOffSet;
                         }
                         else
                         {
-                            badgeTotal += x - LOWEROFFSET;
+                            badgeTotal += x - LowerOffSet;
                         }
                     });
 
@@ -53,11 +52,11 @@ namespace AdventOfCode.Days
                 {
                     if (x >= 65 && x <= 90)
                     {
-                        total += x - UPPEROFFSET;
+                        total += x - UpperOffSet;
                     }
                     else
                     {
-                        total += x - LOWEROFFSET;
+                        total += x - LowerOffSet;
                     }
                 });
 

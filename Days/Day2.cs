@@ -7,9 +7,7 @@ namespace AdventOfCode.Days
 {
     public class Day2 : DayBase
     {
-        internal Day2() : base(2, 2022, "Rock Paper Scissors")
-        {
-        }
+        internal Day2() : base(2, 2022, "Rock Paper Scissors"){}
 
         public override void Play()
         {
