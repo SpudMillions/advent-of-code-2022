@@ -11,9 +11,11 @@ namespace AdventOfCode.Days
         {
         }
 
+        private const char EmptyChar = (char)32;
+
         public override void Play()
         {
-            const char emptyChar = (char)32;
+            
             var packageRowsFifo = (from line in Input
                 where !line.StartsWith("move")
                 select line.Replace("[", " ")
@@ -40,8 +42,8 @@ namespace AdventOfCode.Days
 
                 while (numberOfMoves > 0)
                 {
-                    var fromIndex = packageRowsFifo.FindIndex(row => row[from] != emptyChar);
-                    var fromIndexCopy = packageRowsLifo.FindIndex(row => row[from] != emptyChar);
+                    var fromIndex = packageRowsFifo.FindIndex(row => row[from] != EmptyChar);
+                    var fromIndexCopy = packageRowsLifo.FindIndex(row => row[from] != EmptyChar);
                     var newFifoRow = MovePackage( to, packageRowsFifo, fromIndex, @from);
                     var newLifoRow = MovePackage(to, packageRowsLifo, fromIndexCopy, @from);
                     packageRowsFifo.Insert(0, newFifoRow);
@@ -63,11 +65,11 @@ namespace AdventOfCode.Days
             var newPackageRows = new List<char>();
             for (var i = 0; i < 35; i++)
             {
-                newPackageRows.Add((char)32);
+                newPackageRows.Add(EmptyChar);
             }
 
             newPackageRows.Insert(to, packageRowsInput[fromIndex][@from]);
-            packageRowsInput[fromIndex][@from] = (char)32;
+            packageRowsInput[fromIndex][@from] = EmptyChar;
             return newPackageRows;
         }
 
@@ -82,7 +84,7 @@ namespace AdventOfCode.Days
             var packageLineIndex = 1;
             while (packageLineIndex < 34)
             {
-                var packageIndex = packageRows.FindIndex(row => row[packageLineIndex] != 32);
+                var packageIndex = packageRows.FindIndex(row => row[packageLineIndex] != EmptyChar);
                 if (packageIndex != -1)
                 {
                     topRowPackages += packageRows[packageIndex][packageLineIndex];
