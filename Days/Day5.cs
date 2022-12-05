@@ -48,14 +48,12 @@ namespace AdventOfCode.Days
                     var newLifoRow = MovePackage(to, packageRowsLifo, fromIndexCopy, @from);
                     packageRowsFifo.Insert(0, newFifoRow);
                     packageRowsLifo.Insert(numberOfPackagesToLift, newLifoRow);
-                    numberOfPackagesToLift += 1;
-                    numberOfMoves -= 1;
+                    numberOfPackagesToLift++;
+                    numberOfMoves--;
                 }
             }
-            var topRowPackages = TopRowPackages(packageRowsFifo);
-            var packageRowsCopyPackages = TopRowPackages(packageRowsLifo);
             
-            Console.WriteLine($"{GetType().Name}: {Title} --- First Order Top Packages: {topRowPackages}. Second Order Top Packages: {packageRowsCopyPackages}");
+            Console.WriteLine($"{GetType().Name}: {Title} --- First Order Top Packages: {TopRowPackages(packageRowsFifo)}. Second Order Top Packages: {TopRowPackages(packageRowsLifo)}");
 
         }
 
