@@ -13,6 +13,7 @@ Day2: Total score: 15523, Total score part two: 15702
 Day3: Rucksack Reorganization -- Total score: 7691, Total score part two: 2508
 Day4: Camp Cleanup -- Total overlapping completely: 560, Total any overlap: 839
 Day5: Supply Stacks --- First Order Top Packages: FJSRQCFTN. Second Order Top Packages: CJVLJQPHS
+Day6 : Tuning Trouble --- Characters Processed for 4 unique: 1566. Characters processed for 14 unique: 2265
 ```
 
 ## New Problems
