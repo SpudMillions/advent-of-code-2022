@@ -6,3 +6,4 @@ new Day3().Play();
 new Day4().Play();
 new Day5().Play();
 new Day6().Play();
+new Day7().Play();
