@@ -15,6 +15,7 @@ Day4: Camp Cleanup -- Total overlapping completely: 560, Total any overlap: 839
 Day5: Supply Stacks --- First Order Top Packages: FJSRQCFTN. Second Order Top Packages: CJVLJQPHS
 Day6 : Tuning Trouble --- Characters Processed for 4 unique: 1566. Characters processed for 14 unique: 2265
 Day7 : No Space Left On Device --- Total Size Available to Delete: 1307902. Directory to delete: jswfprpl with size 7068748
+Day8 : Treetop Tree House --- There are 1715 trees visible. The best tree spot has 374400 trees visible.
 ```
 
 ## New Problems
