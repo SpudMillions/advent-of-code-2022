@@ -16,6 +16,7 @@ Day5: Supply Stacks --- First Order Top Packages: FJSRQCFTN. Second Order Top Pa
 Day6 : Tuning Trouble --- Characters Processed for 4 unique: 1566. Characters processed for 14 unique: 2265
 Day7 : No Space Left On Device --- Total Size Available to Delete: 1307902. Directory to delete: jswfprpl with size 7068748
 Day8 : Treetop Tree House --- There are 1715 trees visible. The best tree spot has 374400 trees visible.
+Day9 : Rope Bridge --- Tail visited 6284 positions. Knots visited 2661 positions.
 ```
 
 ## New Problems
