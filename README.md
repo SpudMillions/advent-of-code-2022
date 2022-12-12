@@ -25,6 +25,9 @@ Day10 : Cathode-Ray Tube --- Signal Strength for X Register is 13820 jiggawatts.
  #   # #  # ## ###  # #  # ## ###  # #  
 #    # #  #  # # #  # #  #  # # #  # #  
 #### #  #  ### #  # #  #  ### #  # #  # 
+Day11 : Monkey in the Middle --- Monkey Business After 1000 rounds: 151312.
+Day11 : Monkey in the Middle --- Monkey Business After 10000 rounds: 51382025916.
+
 ```
 
 ## New Problems
