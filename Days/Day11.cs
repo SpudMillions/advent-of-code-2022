@@ -85,14 +85,6 @@ namespace AdventOfCode.Days
                     Console.WriteLine($"{GetType().Name} : {Title} --- Monkey Business After {rounds2} rounds: {result2}.");
                 }
             }
-
-
-           
-            
-            
-
-            
-        
         }
 
         private IEnumerable<Monkey> CreateMonkeys(List<string> input)

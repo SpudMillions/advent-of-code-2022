@@ -27,6 +27,7 @@ Day10 : Cathode-Ray Tube --- Signal Strength for X Register is 13820 jiggawatts.
 #### #  #  ### #  # #  #  ### #  # #  # 
 Day11 : Monkey in the Middle --- Monkey Business After 1000 rounds: 151312.
 Day11 : Monkey in the Middle --- Monkey Business After 10000 rounds: 51382025916.
+Day12 : Hill Climbing Algorithm -- Path length from start to end: 468 steps. Shortest starting point that could be found requires: 459 steps.
 
 ```
 

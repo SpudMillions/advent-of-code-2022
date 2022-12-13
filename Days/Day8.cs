@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using AdventOfCode.Common;
 
 namespace AdventOfCode.Days
@@ -13,7 +11,7 @@ namespace AdventOfCode.Days
 
         public override void Play()
         {
-            var forest = CreateMatrix(Input);
+            var forest = Utility.CreateMatrix<int>(Input);
             var length = forest.GetLength(1);
             var width = forest.GetLength(0);
             
@@ -125,28 +123,6 @@ namespace AdventOfCode.Days
 
             var result = left || right || up || down;
             return result;            
-        }
-
-        private static int[,] CreateMatrix(List<string>? input)
-        {
-            if (input == null) return new int[,] { };
-            var forest = new int[input.Count, input[0].Length];
-            var lineNumber = 0;
-            
-            foreach (var line in input)
-            {
-                var characterNumber = 0;
-                foreach (var s in line)
-                {
-                    forest[lineNumber, characterNumber] = int.Parse(s.ToString());
-                    characterNumber++;
-                }
-
-                lineNumber++;
-            }
-
-            return forest;
-
         }
     }
 }

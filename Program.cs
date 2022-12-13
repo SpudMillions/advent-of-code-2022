@@ -11,3 +11,4 @@ new Day8().Play();
 new Day9().Play();
 new Day10().Play();
 new Day11().Play();
+new Day12().Play();
